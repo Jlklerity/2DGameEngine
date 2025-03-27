@@ -112,9 +112,9 @@ int main() {
 
     // Define triangle vertices
     float vertices[] = {
-        0.0f,  0.5f,  0.0f,  // Vertex 1 (x, y, z)
-        -0.5f, -0.5f,  0.0f,  // Vertex 2 (x, y, z)
-        0.5f, -0.5f,  0.0f   // Vertex 3 (x, y, z)
+        -0.5f,  0.0f,  0.0f,  // Vertex 1 (x, y, z)
+        0.0f, -0.5f,  0.0f,  // Vertex 2 (x, y, z)
+        0.0f, 0.5f,  0.0f   // Vertex 3 (x, y, z)
     };
 
     unsigned int VAO, VBO;
