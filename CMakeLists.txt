@@ -15,7 +15,7 @@ include_directories(include)
 find_package(glfw3 REQUIRED)
 
 # Add executable
-add_executable(GameEngine2D src/main.cpp src/glad.c)
+add_executable(GameEngine2D src/main.cpp src/glad.c src/Shader.cpp)
 
 # Link OpenGL and GLFW
 target_link_libraries(GameEngine2D PRIVATE glfw "-framework OpenGL")
