@@ -1,0 +1,4 @@
+# ninja log v6
+1	85	1743038778952483194	CMakeFiles/GameEngine2D.dir/src/glad.c.o	e9ded082b8aa6951
+1	398	1743038778952241000	CMakeFiles/GameEngine2D.dir/src/main.cpp.o	819f135969c85bda
+399	440	1743038779350380152	GameEngine2D	2a777b8ea221a253

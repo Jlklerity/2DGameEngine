@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/main.cpp.o -c /Users/JL/2DGraphicEngine/src/main.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/main.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang -I/Users/JL/2DGraphicEngine/include -isystem /opt/homebrew/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/glad.c.o -c /Users/JL/2DGraphicEngine/src/glad.c",
+  "file": "/Users/JL/2DGraphicEngine/src/glad.c",
+  "output": "CMakeFiles/GameEngine2D.dir/src/glad.c.o"
+}
+]

@@ -1,0 +1,3 @@
+/Users/JL/2DGraphicEngine/build/CMakeFiles/GameEngine2D.dir
+/Users/JL/2DGraphicEngine/build/CMakeFiles/edit_cache.dir
+/Users/JL/2DGraphicEngine/build/CMakeFiles/rebuild_cache.dir
