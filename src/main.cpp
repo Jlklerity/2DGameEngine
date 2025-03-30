@@ -87,7 +87,7 @@ int main() {
         // Draw the triangle
         shader.use();
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
