@@ -1,0 +1,9 @@
+Install MSYS from "https://www.msys2.org/"
+Run the installer and run MSYS2 using the commands below
+Update the package database. Run the following command inside the MSYS2 terminal> pacman -Syu
+Install MinGW-w64 (64-bit)> pacman -S mingw-w64-x86_64-gcc
+For 32-bit> pacman -S mingw-w64-i686-gcc
+Install CMake> pacman -S mingw-w64-x86_64-cmake
+For 32-bit> pacman -S mingw-w64-i686-cmake
+Add "C:\msys64\mingw64\bin" to Environment path
+Verify installtion of gcc and cmake> gcc --version, cmake --version
