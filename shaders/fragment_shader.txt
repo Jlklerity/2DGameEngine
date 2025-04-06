@@ -1,6 +1,23 @@
 #version 410 core
+in vec3 vertexColor;
+in vec2 TexCoord;
 out vec4 FragColor; // Output color
 
-void main() {
-    FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f); // Green color
+// Uniform to control texture (e.g., for switching textures)
+uniform int texture1; // Integer uniform for texture selection
+
+// Sampler for texture
+uniform sampler2D texture0;
+
+void main()
+{
+    // If texture1 == 1, apply the texture; otherwise, use the color
+    if (texture1 == 1)
+    {
+        FragColor = texture(texture0, TexCoord);  // Use texture
+    }
+    else
+    {
+        FragColor = vec4(vertexColor, 1.0);          // Use color
+    }
 }

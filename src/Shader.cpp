@@ -22,7 +22,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
     glCompileShader(fragmentShader);
     checkCompileErrors(fragmentShader, "FRAGMENT");
 
-    // Create shader program
+    // Create shader program 
     ID = glCreateProgram();
     glAttachShader(ID, vertexShader);
     glAttachShader(ID, fragmentShader);
@@ -38,12 +38,12 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
 void Shader::use() const {
     glUseProgram(ID);
 }
-/*
+
 // Set an integer uniform
 void Shader::setUniform1i(const std::string& name, int value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
-
+/*
 // Set a float uniform
 void Shader::setUniform1f(const std::string& name, float value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
@@ -53,12 +53,12 @@ void Shader::setUniform1f(const std::string& name, float value) const {
 void Shader::setUniform3f(const std::string& name, float v1, float v2, float v3) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), v1, v2, v3);
 }
-
+*/
 // Set a 4x4 matrix uniform
 void Shader::setUniformMatrix4fv(const std::string& name, const float* matrix) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, matrix);
 }
-*/
+
 // Load shader source from a file
 std::string Shader::loadShaderSource(const std::string& filepath) {
     std::ifstream file(filepath);
