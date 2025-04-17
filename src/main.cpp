@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "TextRenderer.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <iostream>
@@ -7,14 +8,54 @@
 #include <fstream>
 #include <sstream>
 
+
 // Window dimensions
 const unsigned int WIDTH = 800;
 const unsigned int HEIGHT = 600;
+
+TextRenderer* text;
+
+//Position variables
+float posX = 0.0f;
+float posY = 0.0f;
+float speed = 1.0f; // units per second
+
+float starPosY = 0.5f;
+float starVelocityY = 0.0f;
+const float gravityAccel = -1.0f; // Gravity acceleration (downwards)
+const float starGround = -0.9f;   // Stop falling here
+
+// FPS averaging variables
+float lastFPSUpdateTime = 0.0f;
+int frameCount = 0;
+float avgFPS = 0.0f;
 
 // Callback function to adjust viewport when resizing
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
+
+//Receive user input
+void processInput(GLFWwindow* window, float& x, float& y, float speed, float deltaTime){
+    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        y += speed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        y -= speed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        x -= speed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        x += speed * deltaTime; 
+    
+    // Reset scene on spacebar
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        x = 0.0f;
+        y = 0.0f;
+        starPosY = 0.5f;
+        starVelocityY = 0.0f;
+    }
+} 
+
+float lastFrame = 0.0f; 
 
 int main() {
     // Initialize GLFW
@@ -51,6 +92,10 @@ int main() {
     // Enable alpha blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    //Render FPS Counter
+    text = new TextRenderer(WIDTH, HEIGHT);
+    text->Load("/System/Library/Fonts/Avenir.ttc", 24);
 
     Shader shader("../shaders/vertex_shader.txt", "../shaders/fragment_shader.txt");
 
@@ -127,14 +172,28 @@ int main() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
     glBindVertexArray(0); // Unbind VAO
-
-    // Set the texture uniform in the shader
-    shader.use();
-    shader.setUniform1i("texture1", 1); // Use texture unit 0 (set 2nd parameter to 1  
-                                                    //  to use texture in fragment shader)
-
+ 
     // Game loop
     while (!glfwWindowShouldClose(window)) {
+        //Track time between frames (for frame-rate-independent movement)
+        float currentFrame = glfwGetTime();
+        float deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+ 
+        // Prevent it from falling below the ground
+        if (starPosY < starGround) {
+            starPosY = starGround;
+            starVelocityY = 0.0f;
+        }
+         // If 1 second has passed, update the FPS counter
+        if (currentFrame - lastFPSUpdateTime >= 1.0f) {
+            avgFPS = frameCount; // Set the FPS to the number of frames counted
+            frameCount = 0; // Reset the frame count
+            lastFPSUpdateTime = currentFrame; // Update the last FPS update time
+        }
+        // Calculate FPS (frames per second)
+        frameCount++;
+    
         // Process input
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
@@ -144,32 +203,53 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);         // Clear screen
 
         // Update transform matrix each frame
+        
         float speed = 2.0f;
         float angle = glfwGetTime() * speed; // Time-based rotation
         float cosA = cos(angle);
         float sinA = sin(angle);
-        float scale = 1.0f;
-        float x = 0.0f, y = 0.0f;
+        float scale = 0.5f;
+        
+        // Gravity simulation for the second object
+        starVelocityY += gravityAccel * deltaTime;    // Accelerate downward
+        starPosY += starVelocityY * deltaTime;        // Move based on velocity
 
+       // float x = 0.9f, y = 0.0f;
+
+        // Set the texture uniform in the shader
+        shader.use();
+        shader.setUniform1i("texture1", 1); // Use texture unit 0 (set 2nd parameter to 1  
+                                                        //  to use texture in fragment shader)
+        glBindVertexArray(VAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        //Star object
         float transform[] = {
             cosA * scale,  sinA * scale, 0.0f, 0.0f,  // rotates object by angle radians.
         -sinA * scale,  cosA * scale, 0.0f, 0.0f,   // scales it by scale (shrinks or enlarges).
             0.0f,          0.0f,         1.0f, 0.0f,
-            x,             y,            0.0f, 1.0f
+            posX,          posY,            0.0f, 1.0f
         };
-
-        shader.use();
         int loc = glGetUniformLocation(shader.ID, "transform");
         glUniformMatrix4fv(loc, 1, GL_FALSE, transform);
-
-        // Activate texture unit 0 and bind texture
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        // Draw the object
-        glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+       
+        // Object 2
+        float transform2[] = { scale,  0.0f, 0.0f, 0.0f,  // rotates object by angle radians.
+            0.0f,  scale, 0.0f, 0.0f,   // scales it by scale (shrinks or enlarges).
+                0.0f,          0.0f,         1.0f, 0.0f,
+                0.5f,          starPosY,            0.0f, 1.0f };
+        glUniformMatrix4fv(loc, 1, GL_FALSE, transform2);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        
 
+        //Player input
+        processInput(window, posX, posY, speed, deltaTime);
+        
+       // Display FPS count (smoothing by averaging)
+        text->RenderText("FPS: " + std::to_string((int)avgFPS), 10.0f, HEIGHT - 30.0f, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+        
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();

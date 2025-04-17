@@ -1,0 +1,17 @@
+#version 410 core
+
+// Input attributes
+layout(location = 0) in vec3 position; // Vertex position
+layout(location = 1) in vec2 texCoord; // Texture coordinates
+
+out vec2 TexCoords; // Output texture coordinates to fragment shader
+
+uniform mat4 projection; // Projection matrix
+
+void main() {
+    // Apply the projection transformation to the vertex position
+    gl_Position = projection * vec4(position, 1.0); // Ensure position is a vec3 and add 1.0 for homogeneous coordinate
+
+    // Pass texture coordinates to the fragment shader
+    TexCoords = texCoord; // Pass texture coordinates
+}
