@@ -14,6 +14,8 @@ public:
     // Use the shader program
     void use() const;
 
+    void setBool(const std::string &name, bool value) const;
+
     // Utility functions for setting uniforms
     void setUniform1i(const std::string& name, int value) const;
     /*
