@@ -77,6 +77,34 @@ build CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o: CXX_COMPILER__GameEngi
   OBJECT_DIR = CMakeFiles/GameEngine2D.dir
   OBJECT_FILE_DIR = CMakeFiles/GameEngine2D.dir/src
 
+build CMakeFiles/GameEngine2D.dir/src/Star.cpp.o: CXX_COMPILER__GameEngine2D_unscanned_Debug /Users/JL/2DGraphicEngine/src/Star.cpp || cmake_object_order_depends_target_GameEngine2D
+  DEP_FILE = CMakeFiles/GameEngine2D.dir/src/Star.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
+  INCLUDES = -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/GameEngine2D.dir
+  OBJECT_FILE_DIR = CMakeFiles/GameEngine2D.dir/src
+
+build CMakeFiles/GameEngine2D.dir/src/Texture.cpp.o: CXX_COMPILER__GameEngine2D_unscanned_Debug /Users/JL/2DGraphicEngine/src/Texture.cpp || cmake_object_order_depends_target_GameEngine2D
+  DEP_FILE = CMakeFiles/GameEngine2D.dir/src/Texture.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
+  INCLUDES = -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/GameEngine2D.dir
+  OBJECT_FILE_DIR = CMakeFiles/GameEngine2D.dir/src
+
+build CMakeFiles/GameEngine2D.dir/src/Platform.cpp.o: CXX_COMPILER__GameEngine2D_unscanned_Debug /Users/JL/2DGraphicEngine/src/Platform.cpp || cmake_object_order_depends_target_GameEngine2D
+  DEP_FILE = CMakeFiles/GameEngine2D.dir/src/Platform.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
+  INCLUDES = -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/GameEngine2D.dir
+  OBJECT_FILE_DIR = CMakeFiles/GameEngine2D.dir/src
+
+build CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o: CXX_COMPILER__GameEngine2D_unscanned_Debug /Users/JL/2DGraphicEngine/src/Wall.cpp || cmake_object_order_depends_target_GameEngine2D
+  DEP_FILE = CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
+  INCLUDES = -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/GameEngine2D.dir
+  OBJECT_FILE_DIR = CMakeFiles/GameEngine2D.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target GameEngine2D
@@ -85,7 +113,7 @@ build CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o: CXX_COMPILER__GameEngi
 #############################################
 # Link the executable GameEngine2D
 
-build GameEngine2D: CXX_EXECUTABLE_LINKER__GameEngine2D_Debug CMakeFiles/GameEngine2D.dir/src/main.cpp.o CMakeFiles/GameEngine2D.dir/src/glad.c.o CMakeFiles/GameEngine2D.dir/src/Shader.cpp.o CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o | /opt/homebrew/lib/libglfw.3.4.dylib /opt/homebrew/lib/libfreetype.dylib /opt/homebrew/lib/libglm.dylib
+build GameEngine2D: CXX_EXECUTABLE_LINKER__GameEngine2D_Debug CMakeFiles/GameEngine2D.dir/src/main.cpp.o CMakeFiles/GameEngine2D.dir/src/glad.c.o CMakeFiles/GameEngine2D.dir/src/Shader.cpp.o CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o CMakeFiles/GameEngine2D.dir/src/Star.cpp.o CMakeFiles/GameEngine2D.dir/src/Texture.cpp.o CMakeFiles/GameEngine2D.dir/src/Platform.cpp.o CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o | /opt/homebrew/lib/libglfw.3.4.dylib /opt/homebrew/lib/libfreetype.dylib /opt/homebrew/lib/libglm.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/libglfw.3.4.dylib  -framework OpenGL  /opt/homebrew/lib/libfreetype.dylib  /opt/homebrew/lib/libglm.dylib
   OBJECT_DIR = CMakeFiles/GameEngine2D.dir

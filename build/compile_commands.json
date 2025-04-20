@@ -22,5 +22,29 @@
   "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o -c /Users/JL/2DGraphicEngine/src/TextRenderer.cpp",
   "file": "/Users/JL/2DGraphicEngine/src/TextRenderer.cpp",
   "output": "CMakeFiles/GameEngine2D.dir/src/TextRenderer.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Star.cpp.o -c /Users/JL/2DGraphicEngine/src/Star.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/Star.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/Star.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Texture.cpp.o -c /Users/JL/2DGraphicEngine/src/Texture.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/Texture.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/Texture.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Platform.cpp.o -c /Users/JL/2DGraphicEngine/src/Platform.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/Platform.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/Platform.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o -c /Users/JL/2DGraphicEngine/src/Wall.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/Wall.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o"
 }
 ]
