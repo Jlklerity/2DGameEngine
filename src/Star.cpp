@@ -81,7 +81,7 @@ void Star::BounceIfCollidingWithWall(const glm::vec2& wallPos, const glm::vec2& 
         float oldVelocityX = velocity.x;
 
         // Reverse the velocity with a bounce factor (0.8f)
-        velocity.x *= -1.0f;
+        velocity.x *= -0.8f;
         
         // Handle collision based on the direction of movement
         if (oldVelocityX > 0.0f) { // Moving right and colliding with the left wall
