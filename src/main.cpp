@@ -18,7 +18,7 @@ const float starGround = -0.9f;
 
 // Globals
 float lastFrameTime = 0.0f;
-float posX = 0.0f, posY = -0.6f, speed = 1.0f;
+float posX = 0.0f, posY = -0.6f, speed = 2.0f;
 int frameCount = 0;
 float lastFPSUpdateTime = 0.0f;
 int avgFPS = 0;
@@ -74,27 +74,21 @@ int main() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-   //  GLuint VAO, VBO, EBO;
-    
     // Shader and texture
     Shader shader("../shaders/vertex_shader.txt", "../shaders/fragment_shader.txt");
     Texture texture("../include/Images/clipart2634359.png");
     float aspectRatio = texture.GetAspectRatio();
-
+    std::cout<<aspectRatio<<"\n";
     // Text rendering (FPS)
     text = new TextRenderer(WIDTH, HEIGHT);
     text->Load("/System/Library/Fonts/Avenir.ttc", 24);
 
     // Create star
     glm::vec2 starStartPos(0.0f, 0.7f);
-    glm::vec2 starVel(0.1f, 0.9f);
-    glm::vec2 starSize(0.5f, 0.05f);
+    glm::vec2 starVel(0.3f, 0.9f);
+    glm::vec2 starSize(0.25f, 0.25f);
     float gravity = 2.0f;
-
-// Create multiple stars with different starting positions, velocities, etc.
-    
-      star = new Star(starStartPos, starVel, starSize, gravity);
-    //star = new Star(starStartPos, starVel, starSize, gravity);
+    star = new Star(starStartPos, starVel, starSize, gravity);
     
     // Create platform
     glm::vec2 platformPos(0.0f, -0.9f);  // Position (near the bottom)
@@ -102,12 +96,12 @@ int main() {
     platform = new Platform(platformPos, platformSize);
 
     // Create left wall
-    glm::vec2 wallPosLeft(-1.0f, 0.0f);  // Position (near the bottom)
-    glm::vec2 wallSize(0.5f, 1.5f);  // Size (width = 1.0, height = 0.1)
-    Wall* wallLeft = new Wall(wallPosLeft, wallSize);
+    glm::vec2 wallPosLeft(-0.9f, 0.0f);  // Position (near the bottom)
+    glm::vec2 wallSizeLeft(0.1f, 1.5f);  // Size (width = 1.0, height = 0.1)
+    Wall* wallLeft = new Wall(wallPosLeft, wallSizeLeft);
     //right wall
-    glm::vec2 wallPosRight(1.0f, 0.0f);  // Right wall
-    glm::vec2 wallSizeRight(0.5f, 1.5f); 
+    glm::vec2 wallPosRight(0.9f, 0.0f);  // Right wall
+    glm::vec2 wallSizeRight(0.1f, 1.5f); 
     Wall* wallRight = new Wall(wallPosRight, wallSizeRight);
 
     // Game loop
@@ -139,17 +133,16 @@ int main() {
         wallLeft->Draw(shader, texture, aspectRatio);
         wallRight->Draw(shader, texture, aspectRatio);
         // Draw star
-       
         star->Update(deltaTime);
         star->Draw(shader, texture, aspectRatio, 1.0f, currentFrame * 1.0f);
-        star->BounceIfCollidingWith(glm::vec2(posX, posY), platformSize);
-    
-
+        star->BounceIfCollidingWithPlatform(glm::vec2(posX, -0.9f), platformSize);
+        star->BounceIfCollidingWithWall(wallPosRight, wallSizeRight);
+        star->BounceIfCollidingWithWall(wallPosLeft, wallSizeLeft);
         // Draw platform
-        platform->Update(glm::vec2(posX, posY));
+        platform->Update(glm::vec2(posX, -0.9f));
         platform->Draw(shader, texture, aspectRatio);
 
-        processInput(window, posX, posY, speed, deltaTime);
+
         // Draw FPS
         text->RenderText("FPS: " + std::to_string(avgFPS), 10.0f, HEIGHT - 30.0f, 1.0f, glm::vec3(1.0f,1.0f,1.0f));
 

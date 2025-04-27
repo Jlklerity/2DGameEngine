@@ -34,7 +34,15 @@ Platform::Platform(glm::vec2 pos, glm::vec2 sz)
         glEnableVertexAttribArray(1); 
     }
 void Platform::Update(const glm::vec2& pos) {
-    position = pos; 
+    position = pos; // always apply input
+
+    // then clamp it inside the allowed range
+    if (position.x > 0.9f) {
+        position.x = 0.9f;
+    }
+    else if (position.x < -0.9f) {
+        position.x = -0.9f;
+    }
 }
 
 void Platform::Draw(const Shader& shader, const Texture& texture, float aspectRatio) {
@@ -44,7 +52,7 @@ void Platform::Draw(const Shader& shader, const Texture& texture, float aspectRa
         0.0f, 0.0f,            1.0f, 0.0f,
         position.x, position.y, 0.0f, 1.0f
     };
- 
+    
     shader.use();
     //glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
     glUniform1i(glGetUniformLocation(shader.ID, "useTexture"), false);

@@ -1,9 +1,10 @@
 #include "Star.h"
+#include "Collision.h"
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
-std::vector<Star> stars;
 
 static float vertices[] = {
     // positions    // colors       // tex coords
@@ -45,9 +46,10 @@ void Star::Update(float dt) {
     
 }
 
-void Star::BounceIfCollidingWith(const glm::vec2& platformPos, const glm::vec2& platformSize) {
+void Star::BounceIfCollidingWithPlatform(const glm::vec2& platformPos, const glm::vec2& platformSize) {
+
     // Bottom of star and top of platform
-    float starBottom = position.y;
+    
     float previousBottom = position.y - velocity.y * 0.016f; // assuming ~60fps
     float platformTop = platformPos.y + platformSize.y;
 
@@ -58,8 +60,7 @@ void Star::BounceIfCollidingWith(const glm::vec2& platformPos, const glm::vec2& 
     bool isFalling = velocity.y < 0;
 
     if (horizontallyOverlapping &&
-        starBottom <= platformTop &&
-        previousBottom > platformTop &&
+       Collision::IsCollidingVertically(position, size, platformPos, platformSize) &&
         isFalling)
     {
         // Bounce
@@ -74,8 +75,32 @@ void Star::BounceIfCollidingWith(const glm::vec2& platformPos, const glm::vec2& 
         }
     }
 }
+void Star::BounceIfCollidingWithWall(const glm::vec2& wallPos, const glm::vec2& wallSize) {
+     
+    if (Collision::IsCollidingHorizontally(position, size, wallPos, wallSize, velocity)) {
+        float oldVelocityX = velocity.x;
 
+        // Reverse the velocity with a bounce factor (0.8f)
+        velocity.x *= -1.0f;
+        
+        // Handle collision based on the direction of movement
+        if (oldVelocityX > 0.0f) { // Moving right and colliding with the left wall
+            position.x = wallPos.x - size.x - 0.001f; // Slightly before the wall
+        } 
+        else if (oldVelocityX < 0.0f) { // Moving left and colliding with the right wall
+            position.x = wallPos.x + wallSize.x + 0.001f; // Slightly after the wall
+        }
 
+        // Debug output for position
+        std::cout << "x: " << position.x << " y: " << position.y << "\n";
+
+        // Stop movement if the velocity is too small (below threshold)
+        if (fabs(velocity.x) < 0.001f) {
+            velocity.x = 0.0f; // Set to 0 when it's very small
+            std::cout<<"velocity is 0"<<"\n";
+        }
+    }
+}
 void Star::Draw(const Shader& shader, const Texture& texture, float aspectRatio, float scale, float angle) {
     float cosA = cos(angle);
     float sinA = sin(angle);
@@ -84,7 +109,7 @@ void Star::Draw(const Shader& shader, const Texture& texture, float aspectRatio,
         cosA * scale * aspectRatio,  sinA * scale, 0.0f, 0.0f,
        -sinA * scale * aspectRatio,  cosA * scale, 0.0f, 0.0f,
         0.0f,                         0.0f,         1.0f, 0.0f,
-        position.x,                  position.y,    0.0f, 1.0f
+        position.x /aspectRatio,     position.y,    0.0f, 1.0f
     };
     // Bind to texture unit 0
     shader.use();

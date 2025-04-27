@@ -21,8 +21,8 @@ Texture::Texture(const std::string& filepath)
     std::cout<<filepath.c_str()<<"\n";
     if (data) {
         // Determine format based on channel count
-        GLenum internalFormat = (channels == 4) ? GL_RGBA8 : GL_RGB8;
-        GLenum format = (channels == 4) ? GL_RGBA : GL_RGB;
+        unsigned int internalFormat = (channels == 4) ? GL_RGBA8 : GL_RGB8;
+        unsigned int format = (channels == 4) ? GL_RGBA : GL_RGB;
          
         // Upload texture to OpenGL
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
@@ -54,6 +54,6 @@ float Texture::GetAspectRatio() const {
     return aspectRatio;
 }
 
-GLuint Texture::GetID() const {
+unsigned int Texture::GetID() const {
     return ID;
 }

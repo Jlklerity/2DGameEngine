@@ -21,7 +21,7 @@ message(STATUS "FREETYPE_INCLUDE_DIRS: ${FREETYPE_INCLUDE_DIRS}")
 
 # Add executable
 add_executable(GameEngine2D src/main.cpp src/glad.c src/Shader.cpp src/TextRenderer.cpp
-                src/Star.cpp src/Texture.cpp src/Platform.cpp src/Wall.cpp)
+                src/Star.cpp src/Texture.cpp src/Platform.cpp src/Wall.cpp src/Collision.cpp)
 
 target_include_directories(GameEngine2D PRIVATE ${FREETYPE_INCLUDE_DIRS})
 

@@ -46,5 +46,11 @@
   "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o -c /Users/JL/2DGraphicEngine/src/Wall.cpp",
   "file": "/Users/JL/2DGraphicEngine/src/Wall.cpp",
   "output": "CMakeFiles/GameEngine2D.dir/src/Wall.cpp.o"
+},
+{
+  "directory": "/Users/JL/2DGraphicEngine/build",
+  "command": "/usr/bin/clang++ -I/Users/JL/2DGraphicEngine/include -I/opt/homebrew/include/freetype2 -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/GameEngine2D.dir/src/Collision.cpp.o -c /Users/JL/2DGraphicEngine/src/Collision.cpp",
+  "file": "/Users/JL/2DGraphicEngine/src/Collision.cpp",
+  "output": "CMakeFiles/GameEngine2D.dir/src/Collision.cpp.o"
 }
 ]

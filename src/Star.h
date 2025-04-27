@@ -18,7 +18,8 @@ public:
     void Update(float dt);
     void Draw(const Shader& shader, const Texture& texture,  float aspectRatio, float scale, float angle);
 
-    void BounceIfCollidingWith(const glm::vec2& platformPos, const glm::vec2& platformSize);
+    void BounceIfCollidingWithPlatform(const glm::vec2& platformPos, const glm::vec2& platformSize);
+    void BounceIfCollidingWithWall(const glm::vec2& wallPos, const glm::vec2& wallSize);
     void ResetStar();
     ~Star();
 
