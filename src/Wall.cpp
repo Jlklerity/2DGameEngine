@@ -3,10 +3,10 @@
 
 static float vertices[] = {
     // positions     // colors         // tex coords
-    -0.025f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 0.0f,  // Bottom-left
-     0.025f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,  // Bottom-right
-     0.025f,  0.5f,   0.0f, 0.0f, 1.0f,   1.0f, 1.0f,  // Top-right
-    -0.025f,  0.5f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f   // Top-left
+    -0.025f, -0.5f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,  // Bottom-left
+     0.025f, -0.5f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,  // Bottom-right
+     0.025f,  0.5f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,  // Top-right
+    -0.025f,  0.5f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f   // Top-left
 };
 
 static unsigned int indices[] = {
@@ -27,11 +27,12 @@ Wall::Wall(glm::vec2 pos, glm::vec2 sz)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
         // color attribute (location = 1)
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
         glEnableVertexAttribArray(1);   
         // texture coord attribute (location = 2)
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
-        glEnableVertexAttribArray(2);}
+        glEnableVertexAttribArray(2);
+    }
 
 void Wall::Draw(const Shader& shader, const Texture& texture, float aspectRatio) {
     float transform[] = {
@@ -45,7 +46,7 @@ void Wall::Draw(const Shader& shader, const Texture& texture, float aspectRatio)
     glUniform1i(glGetUniformLocation(shader.ID, "useTexture"), false);
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "transform"), 1, GL_FALSE, transform);
 
-    texture.Bind();
+    //texture.Bind();
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

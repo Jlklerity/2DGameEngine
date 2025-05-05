@@ -113,7 +113,7 @@ void Star::Draw(const Shader& shader, const Texture& texture, float aspectRatio,
     };
     // Bind to texture unit 0
     shader.use();
-    glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
+    // glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
     glUniform1i(glGetUniformLocation(shader.ID, "useTexture"), true);
     texture.Bind();
     

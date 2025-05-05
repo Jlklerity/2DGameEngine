@@ -1,16 +1,16 @@
 #version 410 core
  
 layout(location = 0) in vec2 aPos; // Position of vertex
-layout(location = 1) in vec3 aColor;
+layout(location = 1) in vec3 vertexColor;
 layout(location = 2) in vec2 aTexCoords;
 
-out vec3 vertexColor; // Pass to fragment shader
+out vec3 aColor; // Pass to fragment shader
 out vec2 TexCoords;
 uniform mat4 transform;
 
 void main() {
-    //gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0); //Output position
+        
     gl_Position = transform * vec4(aPos, 0.0, 1.0); // Output position
-    vertexColor = aColor; // Pass color to fragment shader
+    aColor = vertexColor; // Pass color to fragment shader
     TexCoords = aTexCoords; //Pass texture coordinatess
 }

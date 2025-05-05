@@ -68,11 +68,11 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
+    
     // OpenGL settings
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+     
 
     // Shader and texture
     Shader shader("../shaders/vertex_shader.txt", "../shaders/fragment_shader.txt");
@@ -92,7 +92,7 @@ int main() {
     
     // Create platform
     glm::vec2 platformPos(0.0f, -0.9f);  // Position (near the bottom)
-    glm::vec2 platformSize(0.5f, 0.1f);  // Size (width = 1.0, height = 0.1)
+    glm::vec2 platformSize(0.1f, 0.1f);  // Size (width = 1.0, height = 0.1)
     platform = new Platform(platformPos, platformSize);
 
     // Create left wall

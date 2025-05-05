@@ -5,6 +5,7 @@ uniform sampler2D texture1;
 uniform bool useTexture;
 
 in vec2 TexCoords;
+in vec3 aColor;
 out vec4 FragColor;
 
 void main()
@@ -12,6 +13,6 @@ void main()
     if (useTexture)
         FragColor = texture(texture1, TexCoords);
     else
-        FragColor = vec4(1.0, 1.0, 1.0, 1.0); // fallback
-     
+        FragColor = vec4(aColor, 1.0); // fallback
+        //FragColor = vec4(1.0, 1.0, 1.0, 1.0)
 }

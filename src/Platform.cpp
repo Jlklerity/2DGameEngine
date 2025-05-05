@@ -5,14 +5,14 @@
 static float vertices[] = {
     // positions    // colors       // tex coords
     // x,     y,       r,    g,    b,      u,    v
-    -0.5f, -0.025f,   1.0f, 0.0f, 0.0f,   0.0f, 0.0f,  // Bottom-left
-    0.5f, -0.025f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,  // Bottom-right
-    0.5f,  0.025f,   0.0f, 0.0f, 1.0f,   1.0f, 1.0f,  // Top-right
-    -0.5f,  0.025f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f   // Top-left
+    -0.5f, -0.025f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,  // Bottom-left
+    0.5f, -0.025f,    1.0f, 1.0f, 1.0f,   1.0f, 0.0f,  // Bottom-right
+    0.5f,  0.025f,    1.0f, 1.0f, 1.0f,   1.0f, 1.0f,  // Top-right
+    -0.5f,  0.025f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f   // Top-left
 
 };
 
-static unsigned int indices[] = {
+static int indices[] = {
     0, 1, 2,   // first triangle
     2, 3, 0    // second triangle
 };
@@ -30,8 +30,11 @@ Platform::Platform(glm::vec2 pos, glm::vec2 sz)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
         // color attribute (location = 1)
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
         glEnableVertexAttribArray(1); 
+        // texture coord attribute (location = 2)
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+        glEnableVertexAttribArray(2);
     }
 void Platform::Update(const glm::vec2& pos) {
     position = pos; // always apply input
@@ -47,16 +50,16 @@ void Platform::Update(const glm::vec2& pos) {
 
 void Platform::Draw(const Shader& shader, const Texture& texture, float aspectRatio) {
     float transform[] = {
-        size.x * aspectRatio, 0.0f, 0.0f, 0.0f,
+        size.x *aspectRatio, 0.0f, 0.0f, 0.0f,
         0.0f, size.y,          0.0f, 0.0f,
         0.0f, 0.0f,            1.0f, 0.0f,
         position.x, position.y, 0.0f, 1.0f
     };
     
     shader.use();
-    //glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
+    
     glUniform1i(glGetUniformLocation(shader.ID, "useTexture"), false);
-    texture.Bind();
+    //texture.Bind();
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "transform"), 1, GL_FALSE, transform);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
